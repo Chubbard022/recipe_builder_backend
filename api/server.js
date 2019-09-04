@@ -18,5 +18,5 @@ server.get("/",(req,res)=>{
     res.status(200).json("server is working")
 })
 
-//configureRoutes(server);
+configureRoutes(server);
 module.exports = server
