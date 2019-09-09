@@ -10,7 +10,7 @@ router.get("/",authenticate,(req,res)=>{
             res.status(200).json(Response)
         })
         .catch(err=>{
-            res.status(500).json(err)
+            res.status(400).json(err)
         })
 })
 
@@ -23,7 +23,7 @@ router.get("/:id",(req,res)=>{
         res.status(200).json(response)
     })
     .catch(err=>{
-        res.status(500).json(err)
+        res.status(400).json(err)
     })
 })
 
@@ -35,7 +35,7 @@ router.get("/:id/recipe",(req,res)=>{
             res.status(200).json(response)
         })
         .catch(err=>{
-            res.status(500).json(err)
+            res.status(400).json(err)
         })
 })
 
@@ -70,7 +70,7 @@ router.put("/:id",(req,res)=>{
         res.status(200).json(response)
     })
     .catch(err=>{
-        res.status(500).json(err)
+        res.status(400).json(err)
     })
 })
 
@@ -83,7 +83,7 @@ router.delete("/:id",(req,res)=>{
         res.status(200).json(response)
     })
     .catch(err=>{
-        res.status(500).json(err)
+        res.status(400).json(err)
     })
 })
 

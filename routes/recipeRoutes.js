@@ -3,9 +3,69 @@ const router = require("express").Router()
 const db = knex(knexConfig.development)
 const {authenticate} = require("../auth/authenticate")
 
-//receiving all categories 
+//receiving all recipies 
 router.get("/",authenticate,(req,res)=>{
-    
+    db("recipes")
+    .then(response=>{
+        res.status(200).json(response)
+    })
+    .catch(err=>{
+        res.status(500).json(err)
+    })
+})
+
+//receiving a recipe by their id
+router.get("/id",(req,res)=>{
+    db("recipes")
+    .where({recipeId: req.params.id})
+    .first()
+    .then(response=>{
+        res.status(200).json(response)
+    })
+    .catch(err=>{
+        res.status(400).json(err)
+    })
+})
+
+//posting a new recipe
+router.post("/",(req,res)=>{
+    const newRecipe = req.body
+    db("recipes")
+    .insert(newRecipe)
+    .then(response=>{
+        const id = response[0]
+        .where({id})
+        .first()
+        .then(response=>{
+            res.status(201).json(response)
+        })
+        .catch(err=>{
+            res.status(400).json(err)
+        })
+    })
+})
+
+//editing a recipe
+router.put("/:id",(req,res)=>{
+    db("recipes")
+    .where({recipeId:req.params })
+    .then(response=>{
+        res.status(200).json(response)
+    })
+    .catch(err=>{
+        res.status(400).json(err)
+    })
+})
+
+//deleting a recipe
+router.delete("/:id",(req,res)=>{
+    db("recipes")
+    .then(response=>{
+        res.status(203).json(response)
+    })
+    .catch(err=>{
+        res.status(400).json(err)
+    })
 })
 
 module.exports = router;
