@@ -34,12 +34,7 @@ router.post("/",(req,res)=>{
     db("recipes")
     .insert(newRecipe)
     .then(response=>{
-        const id = response[0]
-        .where({id})
-        .first()
-        .then(response=>{
-            res.status(201).json(response)
-        })
+        res.status(201).json({successMessage: "successfully created recipe"})
         .catch(err=>{
             res.status(400).json(err)
         })
@@ -61,6 +56,8 @@ router.put("/:id",(req,res)=>{
 //deleting a recipe
 router.delete("/:id",(req,res)=>{
     db("recipes")
+    .where({id: req.params.id})
+    .del()
     .then(response=>{
         res.status(203).json(response)
     })

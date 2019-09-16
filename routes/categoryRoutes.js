@@ -18,7 +18,7 @@ router.get("/",authenticate,(req,res)=>{
 //getting specific category by their id
 router.get("/:id",(req,res)=>{
     db("categories")
-    .where({id: categoriesID})
+    .where({id: req.params.id})
     .first()
     .then(response=>{
         res.status(200).json(response)
@@ -31,7 +31,7 @@ router.get("/:id",(req,res)=>{
 //getting each recipe from within a given category
 router.get("/:id/recipe",(req,res)=>{
     db("recipes")
-        .where({recipe_id: req.params.id})
+        .where({category_id: req.params.id})
         .then(response=>{
             res.status(200).json(response)
         })
