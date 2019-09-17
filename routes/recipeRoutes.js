@@ -5,7 +5,7 @@ const db = knex(knexConfig.development)
 const {authenticate} = require("../auth/authenticate")
 
 //receiving all recipies 
-router.get("/",authenticate,(req,res)=>{
+router.get("/",(req,res)=>{
     db("recipes")
     .then(response=>{
         res.status(200).json(response)
