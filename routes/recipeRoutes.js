@@ -16,9 +16,9 @@ router.get("/",(req,res)=>{
 })
 
 //receiving a recipe by their id
-router.get("/id",(req,res)=>{
+router.get("/:id",(req,res)=>{
     db("recipes")
-    .where({recipeId: req.params.id})
+    .where({id: req.params.id})
     .first()
     .then(response=>{
         res.status(200).json(response)
