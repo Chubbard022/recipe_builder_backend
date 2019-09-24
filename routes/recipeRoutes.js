@@ -44,7 +44,8 @@ router.post("/",(req,res)=>{
 //editing a recipe
 router.put("/:id",(req,res)=>{
     db("recipes")
-    .where({recipeId:req.params })
+    .where({id:req.params.id})
+    .update(req.body)
     .then(response=>{
         res.status(200).json(response)
     })
