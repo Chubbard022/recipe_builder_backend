@@ -32,10 +32,11 @@ function login(req, res) {
     .then(user => {
       if (user && bcrypt.compareSync(password, user.password)) {
         const token = generateToken(user);
-
+        let id = user.id
         res.status(200).json({
           message: `Welcome ${user.username}!`,
-          token
+          token,
+          id
         });
       } else {
         res.status(401).json({ errorMessage: "Username and/or Password are incorrect" });

@@ -7,6 +7,12 @@ exports.up = function(knex) {
 
         category.string("name",30)//name of category
                 .notNullable()
+
+        category.integer("user_id")//fk to category
+            .notNullable()
+            .unsigned()
+            .references('id')
+            .inTable('users');
             
     })
     .createTable("recipes", recipe=>{
@@ -30,6 +36,12 @@ exports.up = function(knex) {
             .inTable("categories")
             .onDelete("RESTRICT")
             .onUpdate("RESTRICT")
+
+        recipe.integer("user_id")//fk to category
+            .notNullable()
+            .unsigned()
+            .references('id')
+            .inTable('users');
     })
 
 };
