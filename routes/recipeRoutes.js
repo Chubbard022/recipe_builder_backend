@@ -7,7 +7,7 @@ const {authenticate} = require("../auth/authenticate")
 //receiving all recipies 
 router.get("/",(req,res)=>{
     db("recipes")
-    //.where({user_id: req.body.user_id})
+    .where({user_id: req.body.user_id})
     .then(response=>{
         res.status(200).json(response)
         console.log("******")
