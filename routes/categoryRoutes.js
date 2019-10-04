@@ -58,6 +58,7 @@ router.post("/",(req,res)=>{
         })
         .catch(err=>{
             res.status(401).json(err)
+            console.log(err)
         })
     })
 })

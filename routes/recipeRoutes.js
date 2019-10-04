@@ -7,15 +7,12 @@ const {authenticate} = require("../auth/authenticate")
 //receiving all recipies 
 router.get("/",(req,res)=>{
     db("recipes")
-    .where({user_id: req.body.user_id})
-    .then(response=>{
-        res.status(200).json(response)
-        console.log("******")
-        console.log(req.body.user_id)
-    })
-    .catch(err=>{
-        res.status(500).json(err)
-    })
+        .then(Response=>{
+            res.status(200).json(Response)
+        })
+        .catch(err=>{
+            res.status(400).json(err)
+        })
 })
 
 //receiving a recipe by their id
@@ -33,14 +30,17 @@ router.get("/:id",(req,res)=>{
 
 //posting a new recipe
 router.post("/",(req,res)=>{
-    const newRecipe = req.body
+    newCategory = req.body
+
     db("recipes")
-    .insert(newRecipe)
+    .insert(newCategory)
+
+    //responding back with message
     .then(response=>{
-        res.status(201).json({successMessage: "successfully created recipe"})
-        .catch(err=>{
-            res.status(400).json(err)
-        })
+            res.status(201).json(response)
+    })
+    .catch(err=>{
+        res.status(401).json(err)
     })
 })
 
