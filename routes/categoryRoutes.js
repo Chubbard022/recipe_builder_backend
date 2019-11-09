@@ -15,6 +15,16 @@ router.get("/",(req,res)=>{
         })
 })
 
+router.get("/users",(req,res)=>{
+    db("users")
+        .then(user=>{
+            res.status(200).json(user)
+        })
+        .catch(err=>{
+            res.status(400).json("no users found")
+        })
+})
+
 //getting specific category by their id
 router.get("/:id",(req,res)=>{
     db("categories")
