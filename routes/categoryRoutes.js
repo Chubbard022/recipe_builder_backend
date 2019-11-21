@@ -4,7 +4,12 @@ const knexConfig = require("../knexfile")
 const db = knex(knexConfig.development)
 const {authenticate} = require("../auth/authenticate")
 
+
+
+//----------------------------------------------------------------------------------------------
 //receiving all categories 
+//----------------------------------------------------------------------------------------------
+
 router.get("/",(req,res)=>{
     db("categories")
         .then(Response=>{
@@ -24,8 +29,27 @@ router.get("/users",(req,res)=>{
             res.status(400).json("no users found")
         })
 })
+router.get("/userProfile",(req,res)=>{
+    db("users")
+        .then(user=>{
+            //res.status(200).json(user)
+            db("categories")
+                .then(user=>{
+                    res.status(200).json(user)
+                })
+                .catch(err=>{
+                    res.status(400).json(err)
+                })
+        })
+        .catch(err=>{
+            res.status(400).json(err)
+        })
+})
 
+//----------------------------------------------------------------------------------------------
 //getting specific category by their id
+//----------------------------------------------------------------------------------------------
+
 router.get("/:id",(req,res)=>{
     db("categories")
     .where({id: req.params.id})
